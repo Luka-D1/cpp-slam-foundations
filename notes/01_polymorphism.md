@@ -48,29 +48,24 @@
 
 SUMMARY：
     结合01中的代码来看本节学到的知识，可以总结为以下几点：
-    一、
-**基类负责定义统一接口**
+一、**基类负责定义统一接口**
     当一个SLAM系统接收到多种传感器的时候：IMU、GNSS、相机、激光雷达、轮速计，或许各传感器获取数据的方式不同，但是存在一些具体操作：
     获取传感器名称、读取数据、获取时间戳、检查数据是否有效等
     所以就可以在基类中规定统一接口：
-class Sensor {
-public:
-    virtual std::string name() const = 0;
-    virtual void read() = 0;
-    virtual ~Sensor() = default;
-};
-Sensor存在的意义是：其余的派生类想要被系统当作传感器，就要提供这些能力
-
-    二、
-**派生类负责实现差异化操作**
+    class Sensor {
+    public:
+        virtual std::string name() const = 0;
+        virtual void read() = 0;
+        virtual ~Sensor() = default;
+    };
+    Sensor存在的意义是：其余的派生类想要被系统当作传感器，就要提供这些能力
+二、**派生类负责实现差异化操作**
     不同的设备能够分别实现自己的逻辑 比如：
     ImuSensor::read() ➡ 读取加速度与角速度
     GnssSensor::read() ➡ 读取经纬度、位置和速度
     CameraSensor::read() ➡ 获取图像
     这样基于基类的统一操作，派生类可以提供各自定制功能，同时也不会相互影响。
-
-    三、
-**多态能够让上层代码不依赖具体类型**
+三、**多态能够让上层代码不依赖具体类型**
     例如项目中可以写一个通用函数：
     void printSensorData(Sensor& sensor)
     {
