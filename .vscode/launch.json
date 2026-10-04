@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "第 03 课：类与生命周期",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/exercises/03_classes_lifecycle/imu_buffer_demo",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "CMake: build 第03课",
+            "setupCommands": [
+                {
+                    "description": "启用 GDB 标准库数据显示",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}

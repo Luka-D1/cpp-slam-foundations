@@ -8,3 +8,4 @@ set(CMAKE_CXX_EXTENSIONS OFF)   #使用标准C++17，而不是GNU扩展模式。
 
 add_subdirectory(exercises/01_sensor_polymorphism) # 读取第01次练习
 add_subdirectory(exercises/02_references_pointers_const) # 读取第02次练习
+add_subdirectory(exercises/03_classes_lifecycle) # 读取第03次练习
