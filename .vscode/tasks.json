@@ -25,6 +25,22 @@
             "dependsOrder": "sequence",
             "group": {
                 "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "CMake: build 第04课",
+            "type": "process",
+            "command": "cmake",
+            "args": [
+                "--build", "${workspaceFolder}/build",
+                "--target", "sensor_ownership_demo"
+            ],
+            "dependsOn": "CMake: configure Debug",
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
                 "isDefault": true
             },
             "problemMatcher": ["$gcc"]

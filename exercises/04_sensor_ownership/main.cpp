@@ -2,6 +2,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <utility>
 
 class Sensor {
 public:
@@ -39,10 +40,16 @@ int main() {
 
   // TODO 1：使用 make_unique 创建一个由 unique_ptr 独占的 ImuSensor。
   // 调用 name() 和 read()，观察作用域结束时的析构输出。
+  auto imu = std::make_unique<ImuSensor>();
+  std::cout<< imu->name() <<'\n';
+  imu->read();
 
   // TODO 2：把一个 unique_ptr 的所有权移动给另一个 unique_ptr。
   // 预测并验证移动后两个指针的状态。不要复制 unique_ptr，
   // 也不要使用裸 new/delete。
+  auto imu2 = std::move(imu);
+  std::cout<< "imu is null: "<<(imu == nullptr) <<'\n';
+  std::cout<< "imu2 is null: "<<(imu2 == nullptr) <<'\n';
 
   // TODO 3：创建 vector<unique_ptr<Sensor>>。
   // 分别创建 ImuSensor 和 GnssSensor，并把所有权移入容器。
