@@ -257,6 +257,8 @@ exercises/04_sensor_ownership/main.cpp
 回答：
 
 - 此时传感器的所有者是谁？
+所有者应该从原本的imu3与gnss换成了容器sensors
+
 - 容器析构时，其元素会发生什么？
 
 ### TODO 4：遍历并保持多态

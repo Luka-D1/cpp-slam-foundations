@@ -35,7 +35,7 @@ void printSensorData(const Sensor &sensor) {
   sensor.read();
 }
 
-int main() {
+  int main() {
   std::cout << "sensor ownership exercise\n";
 
   // TODO 1：使用 make_unique 创建一个由 unique_ptr 独占的 ImuSensor。
@@ -53,9 +53,24 @@ int main() {
 
   // TODO 3：创建 vector<unique_ptr<Sensor>>。
   // 分别创建 ImuSensor 和 GnssSensor，并把所有权移入容器。
+  std::vector<std::unique_ptr<Sensor>> sensors;
+  auto imu3 = std::make_unique<ImuSensor>();
+  auto gnss = std::make_unique<GnssSensor>();
+  sensors.push_back(std::move(imu3));
+  sensors.push_back(std::move(gnss));
+
+  std::cout << "container size: " << sensors.size() << '\n';
+  std::cout << "imu3 is null: " << (imu3 == nullptr) << '\n';
+  std::cout << "gnss is null: " << (gnss == nullptr) << '\n';
+
 
   // TODO 4：遍历容器。
   // 判空后把每个 Sensor 交给 printSensorData()，验证多态仍然生效。
+  for (const auto& sensor : sensors){
+    if (sensor){
+      printSensorData((*sensor));
+    }  
+  }
 
   // TODO 5：建立最小 shared_ptr/weak_ptr 实验。
   // 观察 use_count()；验证 weak_ptr 不增加计数；
