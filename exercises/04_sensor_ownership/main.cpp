@@ -51,6 +51,9 @@ void printSensorData(const Sensor &sensor) {
   std::cout<< "imu is null: "<<(imu == nullptr) <<'\n';
   std::cout<< "imu2 is null: "<<(imu2 == nullptr) <<'\n';
 
+  {
+    std::cout<<"vector scope begin\n";
+    std::cout<<"\n";
   // TODO 3：创建 vector<unique_ptr<Sensor>>。
   // 分别创建 ImuSensor 和 GnssSensor，并把所有权移入容器。
   std::vector<std::unique_ptr<Sensor>> sensors;
@@ -72,10 +75,41 @@ void printSensorData(const Sensor &sensor) {
     }  
   }
 
+  std::cout<<"vector scope ending\n";
+  std::cout<<"\n";
+  }
+  std::cout<<"vector scope ended\n";
+  std::cout<<"\n";
+
   // TODO 5：建立最小 shared_ptr/weak_ptr 实验。
   // 观察 use_count()；验证 weak_ptr 不增加计数；
   // 用 lock() 临时访问，并在所有 shared_ptr 销毁后检查 expired()。
+    std::weak_ptr<ImuSensor> observer;
+  {
+    auto imu4 = std::make_shared<ImuSensor>();
+    
+    std::cout<< imu4.use_count() <<'\n';
 
+    {
+      
+      auto imu5 =imu4;
+      observer = imu4;
+      std::cout<< imu4.use_count() <<'\n'; 
+      auto locked = observer.lock();
+      if (locked){
+        locked->read();
+        std::cout<< imu4.use_count() <<'\n';
+      } 
+        std::cout<< imu4.use_count() <<'\n';
+    }
+    
+    std::cout<< imu4.use_count() <<'\n'; 
+  }
+    std::cout << observer.expired() << '\n';
+
+    auto locked = observer.lock();
+
+    std::cout << (locked == nullptr) << '\n';
   // TODO 6：用额外的大括号划分作用域。
   // 运行前预测传感器的析构时机与顺序，再记录实际输出。
 
