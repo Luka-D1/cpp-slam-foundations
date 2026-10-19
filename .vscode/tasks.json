@@ -41,6 +41,22 @@
             "dependsOrder": "sequence",
             "group": {
                 "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "CMake: build 第05课",
+            "type": "process",
+            "command": "cmake",
+            "args": [
+                "--build", "${workspaceFolder}/build",
+                "--target", "measurement_packet_demo"
+            ],
+            "dependsOn": "CMake: configure Debug",
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
                 "isDefault": true
             },
             "problemMatcher": ["$gcc"]

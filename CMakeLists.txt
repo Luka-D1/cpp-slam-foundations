@@ -10,3 +10,4 @@ add_subdirectory(exercises/01_sensor_polymorphism) # 读取第01次练习
 add_subdirectory(exercises/02_references_pointers_const) # 读取第02次练习
 add_subdirectory(exercises/03_classes_lifecycle) # 读取第03次练习
 add_subdirectory(exercises/04_sensor_ownership) # 读取第04次练习
+add_subdirectory(exercises/05_copy_move_semantics) # 读取第05次练习

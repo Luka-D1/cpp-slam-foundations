@@ -19,8 +19,8 @@
 | 01 | 继承、虚函数、纯虚函数与多态 | `sensor_demo` | ✅ 已完成 |
 | 02 | 引用、指针、const 与对象生命周期 | `reference_pointer_demo` | ✅ 已完成 |
 | 03 | 类、构造函数、初始化列表、析构与组合 | `imu_buffer_demo` | ✅ 已完成 |
-| 04 | 动态内存、RAII 与智能指针 | `sensor_ownership_demo` | 🚧 进行中 |
-| 05 | 拷贝、移动语义与 Rule of Zero/Five | `measurement_packet_demo` | ⬜ 未开始 |
+| 04 | 动态内存、RAII 与智能指针 | `sensor_ownership_demo` | ✅ 已完成 |
+| 05 | 拷贝、移动语义与 Rule of Zero/Five | `measurement_packet_demo` | 🚧 进行中 |
 | 06 | string、array、vector 与迭代器 | `imu_sequence_demo` | ⬜ 未开始 |
 | 07 | map、set 与 unordered_map | `sensor_registry_demo` | ⬜ 未开始 |
 | 08 | STL 算法、lambda 与函数对象 | `measurement_filter_demo` | ⬜ 未开始 |
