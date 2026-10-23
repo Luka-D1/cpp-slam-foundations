@@ -2,6 +2,31 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "g++: prepare build directory",
+            "type": "process",
+            "command": "mkdir",
+            "args": ["-p", "${workspaceFolder}/build"],
+            "problemMatcher": []
+        },
+        {
+            "label": "g++: build 第06课",
+            "type": "process",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-std=c++17",
+                "-Wall", "-Wextra", "-Wpedantic",
+                "-g", "-O0",
+                "${workspaceFolder}/exercises/06_imu_sequence/main.cpp",
+                "-o", "${workspaceFolder}/build/imu_sequence_direct"
+            ],
+            "dependsOn": "g++: prepare build directory",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        {
             "label": "CMake: configure Debug",
             "type": "process",
             "command": "cmake",
@@ -57,7 +82,7 @@
             "dependsOrder": "sequence",
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             },
             "problemMatcher": ["$gcc"]
         }

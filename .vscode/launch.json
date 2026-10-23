@@ -1,6 +1,27 @@
 {
     "version": "0.2.0",
     "configurations": [
+
+        {
+            "name": "第 06 课：IMU 序列",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/imu_sequence_direct",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "g++: build 第06课",
+            "setupCommands": [
+                {
+                    "description": "启用 GDB 标准库数据显示",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
         {
             "name": "第 05 课：拷贝与移动语义",
             "type": "cppdbg",
