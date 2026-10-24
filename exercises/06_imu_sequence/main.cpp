@@ -42,10 +42,22 @@ bool meanAcceleration(const std::vector<ImuSample> &samples,
   if (samples.empty()) {
     return false;
   }
-
   // 实验 2 的核心：用范围 for 累加三轴，再除以样本数量。
+
   // 写完计算逻辑后将下面的 return false 改为 return true。
-  return false;
+  for (const ImuSample& sample: samples){
+    mean.at(0) += sample.acceleration_mps2.at(0);
+    mean.at(1) += sample.acceleration_mps2.at(1);
+    mean.at(2) += sample.acceleration_mps2.at(2);
+  }
+  mean.at(0) = mean.at(0)/(samples.size());
+  mean.at(1) = mean.at(1)/(samples.size());
+  mean.at(2) = mean.at(2)/(samples.size());
+
+  std::cout << "三轴累加结果：";
+  printAxes(mean);
+  std::cout <<'\n';
+  return true;
 }
 
 void removeOutliers(std::vector<ImuSample> &samples, double threshold) {
@@ -152,10 +164,39 @@ void demoVectorAndMean() {
   std::cout << "last.timestamp= " << last.timestamp_s << '\n';
 
 
+  probe.resize(4);
+  std::cout << "after resize4: size= " << probe.size()
+            << " capacity= " << probe.capacity() <<'\n';
+  
+  std::cout << "probe.at(2).timestamp_s= " << probe.at(2).timestamp_s 
+            << " | acceleration_mps2= " ;
+  printAxes(probe.at(2).acceleration_mps2);
+  std::cout <<'\n';
+
+
+  std::cout << "probe.at(3).timestamp_s= " << probe.at(3).timestamp_s 
+            << " | acceleration_mps2= " ;
+  printAxes(probe.at(3).acceleration_mps2);
+  std::cout <<'\n';
 
 
   // pop_back()、clear()，每次打印 size/capacity，samples 保持完整。
+  probe.pop_back();
+  std::cout << "after pop_back size= " << probe.size()
+            << "| capacity= " << probe.capacity() << '\n';
+            
+            
+  probe.clear();
+  std::cout << "after clear size= " << probe.size()
+            << "| capacity= " << probe.capacity() << '\n';
+  
+
+
+
+
   // 完成 meanAcceleration()，求 samples 三轴均值；再传入空序列试一次。
+
+
 
   printSequence("samples", samples);
   std::cout << "source count=" << source.size() << '\n';
