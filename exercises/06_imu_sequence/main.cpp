@@ -62,6 +62,15 @@ bool meanAcceleration(const std::vector<ImuSample> &samples,
 
 void removeOutliers(std::vector<ImuSample> &samples, double threshold) {
   // 实验 3 的核心：用迭代器遍历，删除 abs(ax) > threshold 的采样。
+  for (auto it = samples.begin(); it != samples.end();){
+    if (abs(it->acceleration_mps2.at(0)) > threshold){
+      it = samples.erase(it);
+    }
+    else{ ++it; }
+  }
+
+  
+
   // 下面两行只是让未完成的骨架无未使用参数警告，实现后可删除。
   (void)samples;
   (void)threshold;
@@ -208,19 +217,92 @@ void demoVectorAndMean() {
   } else {
     std::cout << "当前没有均值；请先填入采样并完成实验 2 的计算逻辑。\n";
   }
+
+  std::vector<ImuSample> empty_samples;
+  std::array<double,3> empty_mean{1.0, 2.0, 3.0};
+
+  bool ok = meanAcceleration(empty_samples, empty_mean);
+
+  std:: cout << "empty calculation ok = " << ok << " | mean= ";
+  printAxes(empty_mean);
+  std::cout << '\n';
+
+
+
 }
 
 void demoIteratorAndErase() {
   std::cout << "\n=== 实验 3：遍历并删除相邻异常采样 ===\n";
   std::vector<ImuSample> samples = makeTrainingSamples();
   printSequence("before erase", samples);
+  std::cout << '\n';
 
   // TODO 3：先用显式迭代器读取采样，理解 begin/end、*it、it-> 和 ++it。
+  for (auto it = samples.begin(); it != samples.end(); ++it){
+    std::cout << "iterator: t= " << it-> timestamp_s <<'\n';
+  }
+
+
   // 在 removeOutliers() 中实现安全删除：删除分支接住 erase 返回的迭代器，
   // 未删除分支才 ++it。不要在范围 for 中直接 erase 当前 vector 的元素。
   // 删除后再算均值；还要测试空序列、全部正常、全部异常这三种情况。
+  std::cout << '\n';
   removeOutliers(samples, 10.0);
-  printSequence("after erase (删除逻辑由你完成)", samples);
+  printSequence("after erase ", samples);
+  std::array<double,3> erase_mean{1.0, 2.0, 3.0};
+   if (meanAcceleration(samples, erase_mean)) {
+    std::cout << "mean=";
+    printAxes(erase_mean);
+    std::cout << '\n';
+  } else {
+    std::cout << "当前没有均值；请先填入采样并完成实验 3 的计算逻辑。\n";
+  }
+
+  //Below is test1 for 删除前后samples中都没有数据
+  std::vector<ImuSample> empty_samples;
+
+  printSequence("empty before", empty_samples);
+  removeOutliers(empty_samples, 10.0);
+  printSequence("empty after", empty_samples);
+
+  std::array<double, 3> test_mean {1.0, 2.0, 3.0};
+  bool ok = meanAcceleration(empty_samples, test_mean);
+  
+  std::cout << "empty mean ok= " << ok << " | mean= ";
+  printAxes(test_mean);
+  std::cout << '\n';
+
+
+  //Below is test2 for 删除前后大小并不改变
+  std::vector<ImuSample> normal_samples  {{0.00, {0.1, -0.2, 9.8}}, {0.01, {0.2, -0.1, 9.7}},
+          {0.04, {0.3, 0.0, 9.9}},  {0.05, {-0.1, 0.1, 9.8}}};
+  
+  printSequence("normal before",normal_samples);
+  removeOutliers(normal_samples, 10.0);
+  printSequence("normal after", normal_samples);
+
+  std::array<double, 3> test_mean2 {1.0, 2.0, 3.0};
+  bool ok2 = meanAcceleration(normal_samples, test_mean2);
+  std::cout << "normal mean ok= " << ok2 << " | mean= ";
+  printAxes(test_mean2);
+  std::cout << '\n';
+
+  //Below is test3 for 删除后大小为0 
+  std::vector<ImuSample> abnormal_samples  {{0.02, {50.0, 0.0, 9.8}}, {0.03, {-60.0, 0.0, 9.8}}};
+  
+  printSequence("abnormal before",abnormal_samples);
+  removeOutliers(abnormal_samples, 10.0);
+  printSequence("abnormal after", abnormal_samples);
+
+  std::array<double, 3> test_mean3 {1.0, 2.0, 3.0};
+  bool ok3 = meanAcceleration(abnormal_samples, test_mean3);
+  std::cout << "abnormal mean ok= " << ok3 << " | mean= ";
+  printAxes(test_mean3);
+  std::cout << '\n';
+
+
+
+
 }
 
 void demoReallocation() {
