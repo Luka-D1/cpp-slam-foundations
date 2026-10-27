@@ -311,11 +311,80 @@ void demoReallocation() {
   const std::size_t saved_index = 0;
 
   // TODO 4：保存当前 capacity，观察 saved_index 对应元素的地址和值。
+  const std::size_t old_capacity = samples.capacity();
+  std::cout << "samples.at(saved_index).timestamp= " << samples.at(saved_index).timestamp_s << '\n';
+  std::cout << "samples.at(saved_index).acceleration_mps2= " ;
+  printAxes(samples.at(saved_index).acceleration_mps2);
+  std::cout << '\n';
+  std::cout << "Address of samples.at(saved_index)= " << &samples.at(saved_index) << '\n';
+
   // 在一个内部大括号里取得该元素的引用、指针和迭代器，并在扩容前使用。
+  {
+    const ImuSample& ref = samples.at(saved_index);
+    const ImuSample* ptr = &samples.at(saved_index);
+    auto it = samples.begin();
+
+    std::cout << "\n---引用打印---\n";
+    std::cout << "ref.timestamp= " << ref.timestamp_s << '\n';
+    std::cout << "ref.acceleration_mps2= " ;
+    printAxes(ref.acceleration_mps2);
+    std::cout << '\n';
+    std::cout << "Address of ref= " << &ref <<'\n';
+
+
+    std::cout << "\n---指针打印---\n";
+    std::cout << "ptr -> timestamp= " << ptr -> timestamp_s << '\n';
+    std::cout << "ptr -> acceleration_mps2= " ;
+    printAxes(ptr -> acceleration_mps2);
+    std::cout << '\n';
+    std::cout << "ptr= " << ptr << '\n';
+
+    std::cout << "\n---迭代器打印---\n";
+    std::cout << "it -> timestamp= " << it -> timestamp_s << '\n';
+    std::cout << "it -> acceleration_mps2= " ;
+    printAxes(it -> acceleration_mps2);
+    std::cout << '\n';
+    std::cout << "&(*it)= " << &(*it) << '\n';
+    
+
+  }
   // 让这些局部变量离开作用域，再 reserve(old_capacity + 1) 保证扩容。
   // 扩容后按 saved_index 重新取得元素，检查时间戳、数据、size 未变。
+
+  samples.reserve(old_capacity + 1);
+  const ImuSample& after =samples.at(saved_index);
+  std::cout << "\n---扩容之后after打印---\n";
+  std::cout << "after.timestamp= " << after.timestamp_s << '\n';
+  std::cout << "after.acceleration_mps2= " ;
+  printAxes(after.acceleration_mps2);
+  std::cout << '\n';
+  std::cout << "Address of after= " << &after <<'\n';
+
+
   // 只比较预先记录的地址文本；不要读取、比较或解引用旧的失效指针/迭代器。
   // 写出“不扩容的 push_back”和“erase”分别会使哪些位置失效。
+  
+  {
+  const auto& last = samples.back();
+  std::cout << "last.timestamp= " << last.timestamp_s << '\n';
+  std::cout << "last.cceleration_mps2= " ;
+  printAxes(last.acceleration_mps2);
+  std::cout << '\n';
+  std::cout << "address of last= " << &last << '\n';
+  }
+
+  samples.push_back({2.00,{1.00, 1.00, 0.00}});
+
+  {
+  const auto& last = samples.back();
+  std::cout << "last.timestamp= " << last.timestamp_s << '\n';
+  std::cout << "last.cceleration_mps2= " ;
+  printAxes(last.acceleration_mps2);
+  std::cout << '\n';
+  std::cout << "address of last= " << &last << '\n';
+  }
+
+
   std::cout << "index=" << saved_index << " | initial size=" << samples.size()
             << " | initial capacity=" << samples.capacity() << '\n';
 }
