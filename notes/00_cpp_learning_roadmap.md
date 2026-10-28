@@ -21,8 +21,8 @@
 | 03 | 类、构造函数、初始化列表、析构与组合 | `imu_buffer_demo` | ✅ 已完成 |
 | 04 | 动态内存、RAII 与智能指针 | `sensor_ownership_demo` | ✅ 已完成 |
 | 05 | 拷贝、移动语义与 Rule of Zero/Five | `measurement_packet_demo` | ✅ 已完成 |
-| 06 | string、array、vector 与迭代器 | `imu_sequence_demo` | 🚧 进行中 |
-| 07 | map、set 与 unordered_map | `sensor_registry_demo` | ⬜ 未开始 |
+| 06 | string、array、vector 与迭代器 | `imu_sequence_demo` | ✅ 已完成 |
+| 07 | map、set 与 unordered_map | `sensor_registry_demo` | 🚧 进行中 |
 | 08 | STL 算法、lambda 与函数对象 | `measurement_filter_demo` | ⬜ 未开始 |
 | 09 | 函数重载、默认参数、内联与回调 | `processing_pipeline_demo` | ⬜ 未开始 |
 | 10 | 运算符重载与自定义数值类型 | `vector2_demo` | ⬜ 未开始 |

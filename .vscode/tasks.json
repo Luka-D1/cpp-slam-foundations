@@ -22,7 +22,7 @@
             "dependsOn": "g++: prepare build directory",
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             },
             "problemMatcher": ["$gcc"]
         },
@@ -37,6 +37,22 @@
                 "-DCMAKE_BUILD_TYPE=Debug"
             ],
             "problemMatcher": []
+        },
+        {
+            "label": "CMake: build 第07课",
+            "type": "process",
+            "command": "cmake",
+            "args": [
+                "--build", "${workspaceFolder}/build",
+                "--target", "sensor_registry_demo"
+            ],
+            "dependsOn": "CMake: configure Debug",
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
         },
         {
             "label": "CMake: build 第03课",

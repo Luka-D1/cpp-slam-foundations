@@ -1,7 +1,26 @@
 {
     "version": "0.2.0",
     "configurations": [
-
+        {
+            "name": "第 07 课：传感器注册表",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/exercises/07_sensor_registry/sensor_registry_demo",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "CMake: build 第07课",
+            "setupCommands": [
+                {
+                    "description": "启用 GDB 标准库数据显示",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
         {
             "name": "第 06 课：IMU 序列",
             "type": "cppdbg",
