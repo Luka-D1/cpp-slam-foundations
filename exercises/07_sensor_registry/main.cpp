@@ -107,10 +107,26 @@ void demoOrderedRegistry() {
     std::cout << "IMU not found\n";
   }
 
-
-
   // find LIDAR，先判断 end，确认查询没有插入新元素。
+  auto it2 = registry.find("LIDAR");
+
+  if (it2 == registry.end()){
+      std::cout << "Lidar unfound." << "\n" ;
+  } 
+
+
+
+
   // erase ODO 两次，记录两次返回的删除数量；最终剩 GNSS、IMU。
+  auto erased1 = registry.erase("ODO");
+  auto erased2 = registry.erase("ODO");
+
+  std:: cout << "first erase= " << erased1 << "\n";
+  std:: cout << "second erase= " << erased2 << "\n";
+
+  printOrderedRegistry("final registry", registry);
+
+
   std::cout << "source records=" << source.size() << '\n';
   printOrderedRegistry("registry", registry);
 }
@@ -125,10 +141,62 @@ void demoUniqueNames() {
   std::set<std::string> names;
 
   // TODO 2：插入 reported 中的名称，记录每次插入的 second。
+  for (const auto& report: reported){
+
+      auto it = names.insert(report);
+      std::cout << "it.second= " << it.second << '\n';
+
+  }
+  printNames(names);
+
+
   // 观察有序且不重复的结果；find/count 查询 IMU 与 LIDAR。
+  auto find1 = names.find("IMU");
+  if (find1 != names.end()){
+  std::cout << "IMU find1(obj): " << *find1 << '\n';
+  }
+  else{std::cout << "IMU unfound" << '\n' ;}
+
+  auto count1 = names.count("IMU");
+  std::cout << "IMU count1(number): " << count1 << '\n';
+
+
+  auto find2 = names.find("LIDAR");
+  if (find2 != names.end()){
+  std::cout << "LIDAR find2(obj): " << *find2 << '\n';
+  }
+  else { std::cout << "LIDAR unfound" << '\n' ;}
+
+  auto count2 = names.count("LIDAR");
+  std::cout << "LIDAR count2(number): " << count2 << '\n';
+
   // 查看 lower_bound(\"LIDAR\")、upper_bound(\"IMU\")、
   // lower_bound(\"ZZZ\")；每次读取前都先检查是否为 end。
+  auto bound1 = names.lower_bound("LIDAR");
+
+  if (bound1 != names.end()){
+    std::cout << "bound1 (an element >= LIDAR) = " << *bound1 << '\n';
+  } else { std::cout << "unfound an element >= LIDAR" ;}
+
+
+  auto bound2 = names.upper_bound("IMU");
+
+  if (bound2 != names.end()){
+    std::cout << "bound2 (an element > IMU) = " << *bound2 << '\n';
+  } else { std::cout << "unfound an element > IMU" ;}
+
+
+  auto bound3 = names.lower_bound("ZZZ");
+
+  if (bound3 != names.end()){
+    std::cout << "bound3 (an element >= ZZZ) = " << *bound3 << '\n';
+  } else { std::cout << "unfound an element >= ZZZ" << '\n' ;}
+
   // 最后 erase GNSS，解释为什么不能直接修改 set 中的名称。
+
+  auto erased = names.erase("GNSS");
+  std::cout << "erased GNSS count= " << erased <<'\n';
+
   std::cout << "reported names=" << reported.size() << '\n';
   printNames(names);
 }
