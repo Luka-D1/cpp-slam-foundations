@@ -207,14 +207,95 @@ void demoHashedRegistry() {
   std::unordered_map<std::string, SensorInfo> registry;
 
   // TODO 3：用与实验 1 相同的 source 填充哈希注册表并按名称查询。
+  for (const auto& record: source){
+    registry.insert({record.name, record.info});
+  }
+
+
+  SensorInfo* imu_info = nullptr;
+  {
+  auto imu = registry.find("IMU");
+  
+  if (imu != registry.end()){
+    imu_info = & (imu -> second);
+    std::cout << "IMU is found: " <<'\n';
+    printInfo(imu -> second);
+    std::cout << '\n' ;
+  } else {std::cout << "IMU not found" << '\n'; }
+  }
+  
+  std::cout << "IMU address before rehash: "
+          << static_cast<const void*>(imu_info) << '\n';
+
+  {
+  auto lidar = registry.find("LIDAR");
+  if (lidar != registry.end()){
+    std::cout << "LIDAR is found: " ;
+    printInfo(lidar -> second);
+    std::cout << '\n' ;
+  }else {std::cout << "LIDAR not found" << '\n'; }
+  }
+
   // 不要求遍历顺序与 map 相同；记录 size、bucket_count、load_factor。
+
+  const auto before_size = registry.size();
+  const auto before_bucket_count = registry.bucket_count();
+  const auto before_load_factor = registry.load_factor();
+  const auto before_max_load_factor = registry.max_load_factor();
+
+
   // reserve(32) 后观察统计，不能把 bucket_count 当作 vector 的 capacity。
+  registry.reserve(32);
+  printHashStats("After reserve", registry);
+  printHashedRegistry("After reserve", registry);
+
   // 要确保一次桶数增长，保存当前桶数再 rehash(old_bucket_count + 1)。
   // rehash 前让旧迭代器离开局部作用域，之后重新 find IMU。
+
+  const auto old_bucket_count = registry.bucket_count();
+  registry.rehash(old_bucket_count + 1);
+  printHashStats("After rehash", registry);
+
+  std::cout << "IMU address after rehash: "
+          << static_cast<const void*>(imu_info) << '\n';
+
+  std::cout << "IMU pointer after rehash | ";
+
+  if (imu_info != nullptr) {
+      printInfo(*imu_info);
+      std::cout << '\n';
+  }
+
+  auto new_imu_it = registry.find("IMU");
+
+  if (new_imu_it != registry.end()) {
+      std::cout << "IMU after rehash by new iterator | ";
+      printInfo(new_imu_it->second);
+      std::cout << '\n';
+  }
+
+if (new_imu_it != registry.end()) {
+
+    SensorInfo* new_imu_info = &(new_imu_it->second);
+
+    std::cout << "IMU address from new iterator: "
+              << static_cast<const void*>(new_imu_info) << '\n';
+
+    std::cout << "same address? "
+              << (imu_info == new_imu_info) << '\n';
+}
+
   // 进阶：保留指向 IMU 的 SensorInfo 的指针，验证未删除元素时
   // rehash 不使该指针失效；与第 06 课 vector 扩容作对比。
+
+
   std::cout << "source records=" << source.size() << '\n';
-  printHashStats("initial stats", registry);
+
+  std::cout << "initial stats" << " | size=" << before_size
+            << " | buckets=" << before_bucket_count
+            << " | load_factor=" << before_load_factor
+            << " | max_load_factor=" << before_max_load_factor << '\n';
+  //printHashStats("initial stats", registry);
   printHashedRegistry("hashed registry", registry);
 }
 
@@ -234,7 +315,7 @@ void demoAccessAndChoice() {
 }
 
 int main() {
-  std::cout << std::boolalpha << std::fixed << std::setprecision(1);
+  std::cout << std::boolalpha << std::fixed << std::setprecision(3);
   std::cout << "lesson 07: sensor registry\n";
   demoOrderedRegistry();
   demoUniqueNames();
