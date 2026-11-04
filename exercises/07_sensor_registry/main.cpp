@@ -304,12 +304,72 @@ void demoAccessAndChoice() {
   std::map<std::string, SensorInfo> registry{{"IMU", {1, 200.0, true}},
                                              {"GNSS", {2, 10.0, true}}};
 
+
   // TODO 4：对比 find(\"LIDAR\") 与 registry[\"LIDAR\"] 后的 size。
+  registry.find("LIDAR");
+  std::cout << "after find size= " << registry.size() << '\n';
+
+  SensorInfo& lidar = registry["LIDAR"];
+  std::cout << "after operator size= " << registry.size() << '\n';
+
   // 后者会插入默认 SensorInfo；打印它，再 erase 掉误插入项。
+  std::cout << "New element in registry: "  ;
+  printInfo(lidar);
+  std::cout << '\n';
+
+  auto erased = registry.erase("LIDAR");
+
+
   // insert_or_assign 更新 IMU 为 {1, 400.0, true}，解释 second=false。
+  //const auto result = registry.insert({"IMU",SensorInfo{1, 400.0, true}});
+  const auto result = registry.insert_or_assign(
+    "IMU", SensorInfo{1, 400.0, true}
+  );
+
+  std::cout <<"insert_or_assign second: "
+            << result.second  << '\n' ;
+  printInfo(result.first -> second);
+  std::cout << '\n' ;
+  
+  
+
   // try_emplace 再插入同键 IMU {99, 999.0, false}，验证没有覆盖。
+  auto existing_imu = registry.try_emplace(
+    "IMU", SensorInfo{99, 999.0, false}
+  );
+
+  std::cout << "try_emplace IMU inserted = "
+            << existing_imu.second << '\n';
+
+  printInfo(existing_imu.first -> second);
+  std::cout << '\n' ;
+
   // try_emplace 新键 ODO，值为 SensorInfo{3, 20.0, false}。
+  auto odo = registry.try_emplace(
+    "ODO",SensorInfo{3, 20.0, false}
+  );
+
+  std::cout << "if odo inserted successfully: " << odo.second << '\n';
+  std::cout << "The info of ODO: "  ;
+  printInfo (odo.first -> second);
+  std::cout << '\n';
+
+  std::cout << "after ODO inserted size: " << registry.size() << '\n' ;
+
+
+
   // 用迭代器循环删除 enabled=false 的项，接住 erase 返回值。
+  for (auto it = registry.begin(); it != registry.end(); ){
+    if (!it -> second.enabled ){
+      it = registry.erase(it);
+
+    }else { 
+      ++it;
+    }
+  }
+
+
+
   // 书面回答：按名称排序输出、只做快速查找、只做去重，分别选谁？
   printOrderedRegistry("initial registry", registry);
 }
