@@ -2,6 +2,26 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "第 08 课：STL 算法与 lambda",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/exercises/08_measurement_filter/measurement_filter_demo",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "CMake: build 第08课",
+            "setupCommands": [
+                {
+                    "description": "启用 GDB 标准库数据显示",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
             "name": "第 07 课：传感器注册表",
             "type": "cppdbg",
             "request": "launch",

@@ -22,8 +22,8 @@
 | 04 | 动态内存、RAII 与智能指针 | `sensor_ownership_demo` | ✅ 已完成 |
 | 05 | 拷贝、移动语义与 Rule of Zero/Five | `measurement_packet_demo` | ✅ 已完成 |
 | 06 | string、array、vector 与迭代器 | `imu_sequence_demo` | ✅ 已完成 |
-| 07 | map、set 与 unordered_map | `sensor_registry_demo` | 🚧 进行中 |
-| 08 | STL 算法、lambda 与函数对象 | `measurement_filter_demo` | ⬜ 未开始 |
+| 07 | map、set 与 unordered_map | `sensor_registry_demo` | ✅ 已完成 |
+| 08 | STL 算法、lambda 与函数对象 | `measurement_filter_demo` | 🚧 进行中 |
 | 09 | 函数重载、默认参数、内联与回调 | `processing_pipeline_demo` | ⬜ 未开始 |
 | 10 | 运算符重载与自定义数值类型 | `vector2_demo` | ⬜ 未开始 |
 | 11 | 模板、auto、decltype、enum class 与 constexpr | `typed_measurement_demo` | ⬜ 未开始 |
@@ -81,6 +81,7 @@
 - 核心：关联容器、键值对、有序与哈希容器的区别；
 - 实验：实现传感器名称到编号、频率和状态的注册表；
 - 验收：能根据查找、顺序和复杂度需求选择容器。
+- 复习：[第 07 课笔记与完课问答](07_map_set_unordered_map.md)。
 
 ### 08 STL 算法、lambda 与函数对象
 
@@ -88,6 +89,7 @@
 - 实验：按时间排序、筛除无效观测并统计数据；
 - 验收：优先组合标准算法，而不是为所有操作手写循环；
 - 翁恺课程：41节，并配合现代 STL 补充材料。
+- 开始：[第 08 课讲义与四个实验](08_stl_algorithms_lambda.md)。
 
 ### 09 函数重载、默认参数、内联与回调
 
