@@ -14,3 +14,4 @@ add_subdirectory(exercises/05_copy_move_semantics) # 读取第05次练习
 add_subdirectory(exercises/06_imu_sequence) # 读取第06次练习
 add_subdirectory(exercises/07_sensor_registry) # 读取第07次练习
 add_subdirectory(exercises/08_measurement_filter) # 读取第08次练习
+add_subdirectory(exercises/09_processing_pipeline) # 读取第09次练习

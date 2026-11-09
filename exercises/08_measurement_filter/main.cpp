@@ -128,7 +128,32 @@ void demoSummarizeResiduals() {
 
   // TODO 4：用 transform 和只读 lambda 提取 residual_m，
   // 通过 std::back_inserter(residuals) 写入结果。
+  std::transform(
+    valid_samples.begin(),
+    valid_samples.end(),
+    std::back_inserter(residuals),
+    [](const Measurement& sample){
+      return sample.residual_m;
+    }
+
+  );
+  
   // 用 accumulate 从 0.0 开始求和；确认非空后再计算均值。
+
+
+
+
+  double sum = std::accumulate(
+    residuals.begin(),
+    residuals.end(),
+    0.0
+  );
+  std::cout << "残差总和为：" << sum << '\n';
+
+  if ( !residuals.empty()){
+  double mean = sum / residuals.size();
+  std::cout << "残差的平均值为：" << mean << '\n';
+  }else {std::cout << "没有可用于统计的残差值" << '\n' ;}
 
   std::cout << "残差数量=" << residuals.size() << '\n';
   for (const double residual : residuals) {

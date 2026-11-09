@@ -23,8 +23,8 @@
 | 05 | 拷贝、移动语义与 Rule of Zero/Five | `measurement_packet_demo` | ✅ 已完成 |
 | 06 | string、array、vector 与迭代器 | `imu_sequence_demo` | ✅ 已完成 |
 | 07 | map、set 与 unordered_map | `sensor_registry_demo` | ✅ 已完成 |
-| 08 | STL 算法、lambda 与函数对象 | `measurement_filter_demo` | 🚧 进行中 |
-| 09 | 函数重载、默认参数、内联与回调 | `processing_pipeline_demo` | ⬜ 未开始 |
+| 08 | STL 算法、lambda 与函数对象 | `measurement_filter_demo` | ✅ 已完成 |
+| 09 | 函数重载、默认参数、内联与回调 | `processing_pipeline_demo` | 🚧 进行中 |
 | 10 | 运算符重载与自定义数值类型 | `vector2_demo` | ⬜ 未开始 |
 | 11 | 模板、auto、decltype、enum class 与 constexpr | `typed_measurement_demo` | ⬜ 未开始 |
 | 12 | 异常、错误处理、optional 与 variant | `measurement_validation_demo` | ⬜ 未开始 |
@@ -89,7 +89,7 @@
 - 实验：按时间排序、筛除无效观测并统计数据；
 - 验收：优先组合标准算法，而不是为所有操作手写循环；
 - 翁恺课程：41节，并配合现代 STL 补充材料。
-- 开始：[第 08 课讲义与四个实验](08_stl_algorithms_lambda.md)。
+- 复习见[第 08 课完课问答与运行核对](08_stl_algorithms_lambda.md#lesson08-review)。
 
 ### 09 函数重载、默认参数、内联与回调
 
@@ -97,6 +97,7 @@
 - 实验：构造可替换预处理步骤的数据处理管线；
 - 验收：理解重载与重写的区别，能够把行为作为参数传递；
 - 翁恺课程：17、18节。
+- 开始学习时读[第 09 课讲义与四个实验](09_overloads_defaults_inline_callbacks.md)。
 
 ### 10 运算符重载与自定义数值类型
 
