@@ -39,6 +39,22 @@
             "problemMatcher": []
         },
         {
+            "label": "CMake: build 第10课",
+            "type": "process",
+            "command": "cmake",
+            "args": [
+                "--build", "${workspaceFolder}/build",
+                "--target", "vector2_demo"
+            ],
+            "dependsOn": "CMake: configure Debug",
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        {
             "label": "CMake: build 第09课",
             "type": "process",
             "command": "cmake",
@@ -50,7 +66,7 @@
             "dependsOrder": "sequence",
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             },
             "problemMatcher": ["$gcc"]
         },

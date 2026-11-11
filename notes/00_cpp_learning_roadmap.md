@@ -24,8 +24,8 @@
 | 06 | string、array、vector 与迭代器 | `imu_sequence_demo` | ✅ 已完成 |
 | 07 | map、set 与 unordered_map | `sensor_registry_demo` | ✅ 已完成 |
 | 08 | STL 算法、lambda 与函数对象 | `measurement_filter_demo` | ✅ 已完成 |
-| 09 | 函数重载、默认参数、内联与回调 | `processing_pipeline_demo` | 🚧 进行中 |
-| 10 | 运算符重载与自定义数值类型 | `vector2_demo` | ⬜ 未开始 |
+| 09 | 函数重载、默认参数、内联与回调 | `processing_pipeline_demo` | ✅ 已完成 |
+| 10 | 运算符重载与自定义数值类型 | `vector2_demo` | 🚧 进行中 |
 | 11 | 模板、auto、decltype、enum class 与 constexpr | `typed_measurement_demo` | ⬜ 未开始 |
 | 12 | 异常、错误处理、optional 与 variant | `measurement_validation_demo` | ⬜ 未开始 |
 | 13 | 文件流、时间处理与传感器日志解析 | `sensor_log_reader` | ⬜ 未开始 |
@@ -97,7 +97,7 @@
 - 实验：构造可替换预处理步骤的数据处理管线；
 - 验收：理解重载与重写的区别，能够把行为作为参数传递；
 - 翁恺课程：17、18节。
-- 开始学习时读[第 09 课讲义与四个实验](09_overloads_defaults_inline_callbacks.md)。
+- 复习见[第 09 课讲义与四个实验](09_overloads_defaults_inline_callbacks.md)。
 
 ### 10 运算符重载与自定义数值类型
 
@@ -105,6 +105,7 @@
 - 实验：实现简化的 `Vector2`，支持加法、标量乘法和输出；
 - 验收：运算符语义自然，不滥用重载；
 - 翁恺课程：30～33节。
+- 开始学习时读[第 10 课讲义与四个实验](10_operator_overloading_vector2.md)。
 
 ### 11 模板与常用现代 C++ 类型机制
 
