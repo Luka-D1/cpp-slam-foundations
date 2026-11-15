@@ -9,6 +9,19 @@ struct Vector2 {
 
   // TODO 1A 在此定义成员函数 Vector2 operator+(const Vector2 &rhs) const。
   // 结果的两个分量分别相加，返回一个新的 Vector2。
+  Vector2 operator+ (const Vector2 &rhs) const{
+      return Vector2 {
+        x + rhs.x , y + rhs.y 
+      };
+  }
+
+  Vector2 operator* (double scale) const {
+    return Vector2 {
+      this -> x * scale , this -> y * scale 
+    };
+
+  }
+
 };
 
 void printComponents(const char *label, const Vector2 &v) {
@@ -17,6 +30,9 @@ void printComponents(const char *label, const Vector2 &v) {
 
 // TODO 2A 在此定义非成员 operator*，支持 Vector2 * double 和 double * Vector2。
 // 让其中一个方向复用另一个方向。
+Vector2 operator* ( double scale, const Vector2 &rhs){
+  return rhs * scale ;
+}
 
 // TODO 3A 在此定义非成员 operator<<，接收 std::ostream & 和 const Vector2 &。
 // 将分量写到传入的流，采用 (x, y) 格式，再返回这个流的引用。
@@ -32,6 +48,16 @@ void demoAddition() {
   printComponents("delta", delta);
 
   // TODO 1B 计算 a + delta，输出新向量并再次输出 a 和 delta。
+  Vector2 res = a + delta;
+  printComponents("res", res);
+
+  std::cout << "计算之后的a: " ;
+  printComponents("a", a);
+  std::cout << "\n" ;
+
+  std::cout << "计算之后的delta: " ;
+  printComponents("delta", delta);
+  std::cout << "\n" ;
 }
 
 void demoScalarMultiplication() {
@@ -42,6 +68,11 @@ void demoScalarMultiplication() {
   std::cout << "scale=" << scale << '\n';
 
   // TODO 2B 分别计算 a * scale 和 scale * a，用 printComponents 输出结果。
+  Vector2 res1 = a * (scale);
+  printComponents("res1", res1);
+
+  Vector2 res2 = scale * a ;
+  printComponents("res2", res2);
 }
 
 void demoStreamOutput() {
