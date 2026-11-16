@@ -36,9 +36,26 @@ Vector2 operator* ( double scale, const Vector2 &rhs){
 
 // TODO 3A 在此定义非成员 operator<<，接收 std::ostream & 和 const Vector2 &。
 // 将分量写到传入的流，采用 (x, y) 格式，再返回这个流的引用。
+std::ostream& operator<< (std::ostream& os , const Vector2 &v ){
+  os << '(' <<  v.x << ',' << v.y << ')'; 
+  return os;
+} 
+
+
+
 
 // TODO 4A 在此定义非成员 operator== 和普通函数 isApprox。
+bool operator== (const Vector2& lhs, const Vector2& rhs){
+  return lhs.x == rhs.x && lhs.y == rhs.y;
+}
+
+
+
 // operator== 对两个分量做精确比较。isApprox 接收额外的绝对容差。
+bool isApprox (const Vector2& lhs, const Vector2& rhs, double abs_tol){
+  return std::abs(lhs.x - rhs.x) < abs_tol && std::abs(lhs.y - rhs.y) < abs_tol ;
+}
+
 
 void demoAddition() {
   std::cout << "\n=== 实验 1 向量加法 ===\n";
@@ -81,7 +98,14 @@ void demoStreamOutput() {
   printComponents("a", a);
 
   // TODO 3B 用 std::cout << a << '\n' 验证链式输出。
+  std::cout << a << '\n';
   // 再写入一个 std::ostringstream，读取它的 str() 核对内容。
+  std::ostringstream oss;
+  oss << a;
+
+  std::cout << "字符串流中的内容：" << oss.str() << '\n' ;
+
+
 }
 
 void demoEquality() {
@@ -100,6 +124,15 @@ void demoEquality() {
 
   // TODO 4B 输出 a == same、a == near、isApprox(a, near, abs_tol) 和
   // isApprox(a, far, abs_tol) 的结果。
+  bool res1 = (a == same);
+  bool res2 = (a == near);
+  bool res3 = isApprox(a, near, abs_tol);
+  bool res4 = isApprox(a, far, abs_tol);
+
+  std::cout << "a == same: " << res1 << '\n';
+  std::cout << "a == near: " << res2 << '\n';
+  std::cout << "isApprox(a, near, abs_tol): " << res3 << '\n';
+  std::cout << "isApprox(a, far, abs_tol): " << res4 << '\n';
 }
 
 int main() {
